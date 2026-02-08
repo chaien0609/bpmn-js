@@ -1,0 +1,279 @@
+/**
+ * Reset & Layout
+ */
+html,
+body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+#canvas {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    display: block;
+}
+
+a:link,
+a:visited {
+    color: #555;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover,
+a:focus {
+    color: #333;
+}
+
+/* --- BUTTON STYLES --- */
+
+.io-control {
+    background: #FAFAFA;
+    border-radius: 2px;
+    border: solid 1px #E0E0E0;
+    padding: 5px;
+}
+
+/* Separator style */
+.io-control .vr,
+.io-control-list .vr {
+    height: 20px;
+    display: inline-block;
+    border-right: 1px solid #CCC;
+    background-color: #CCC;
+    margin: 0 4px;
+    vertical-align: middle;
+    width: 1px;
+}
+
+.io-control hr {
+    border: none;
+    border-top: solid 1px #DDD;
+    width: 15px;
+    margin: 5px auto;
+}
+
+.io-control-list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
+
+.io-control-list.io-horizontal {
+    display: inline-block;
+}
+
+.io-control-list.io-horizontal li {
+    display: inline-block;
+}
+
+.io-control-list.io-horizontal li+li {
+    margin-left: 10px;
+}
+
+.io-control-list a,
+.io-control-list a:visited,
+.io-control-list button {
+    padding: 0;
+    outline: none;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 26px;
+    color: #555;
+    background: none;
+    border: none;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.io-control-list a:hover,
+.io-control-list button:hover {
+    color: #333;
+}
+
+.io-control-list a.inactive,
+.io-control-list button.inactive {
+    color: #CCC;
+    cursor: default;
+}
+
+/* --- Positioning --- */
+
+/* Import/Export - Bottom Left */
+.io-import-export {
+    position: fixed;
+    left: 10px;
+    bottom: 10px;
+    z-index: 100;
+    display: flex;
+    gap: 10px;
+}
+
+/* Apply .io-control styling to the ULs */
+.io-import-export .io-control-list {
+    background: #FAFAFA;
+    border-radius: 2px;
+    border: solid 1px #E0E0E0;
+    padding: 5px;
+}
+
+/* Zoom Controls - Bottom Right */
+.io-zoom-controls {
+    position: fixed;
+    right: 10px;
+    bottom: 80px;
+    width: auto;
+    z-index: 100;
+    background: #FAFAFA;
+    border-radius: 2px;
+    border: solid 1px #E0E0E0;
+    padding: 5px;
+}
+
+.io-zoom-controls ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    text-align: center;
+}
+
+.io-zoom-controls button {
+    display: block;
+    margin: 0 auto;
+}
+
+/* Keyboard Shortcuts - Top Right */
+.io-editing-tools {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+    z-index: 100;
+    background: #FAFAFA;
+    border-radius: 2px;
+    border: solid 1px #E0E0E0;
+    padding: 5px;
+}
+
+.io-editing-tools button {
+    margin: 0;
+}
+
+/* Footer Links */
+.io-about {
+    position: fixed;
+    right: 10px;
+    bottom: 8px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    z-index: 100;
+}
+
+.io-about li {
+    display: inline-block;
+}
+
+.io-about a {
+    font-size: 13px;
+    font-weight: normal;
+    padding: 2px 5px;
+}
+
+.io-about a:hover {
+    background: #F0F0F0;
+    border-radius: 2px;
+}
+
+/* Remove bpmn.io watermark/link */
+.bjs-powered-by {
+    display: none !important;
+}
+
+/* --- Dialogs --- */
+
+.io-dialog {
+    display: none;
+}
+
+.io-dialog.open {
+    display: block;
+}
+
+.io-dialog.open:before {
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    background: #666;
+    opacity: 0.2;
+    z-index: 1001;
+}
+
+.io-dialog .content {
+    position: fixed;
+    width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 100px;
+    background: white;
+    padding: 10px 30px 20px 30px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    border-radius: 2px;
+    z-index: 1001;
+}
+
+.keybindings-dialog .binding {
+    padding: 5px 10px;
+    font-family: monospace;
+    background: #F5F5F5;
+    border: 1px solid #DDD;
+    border-radius: 3px;
+    font-size: 11px;
+}
+
+.shortcuts-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.shortcuts-list li {
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #555;
+}
+
+.close {
+    float: right;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close:hover {
+    color: #333;
+}
+
+h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #EEE;
+    padding-bottom: 10px;
+    font-weight: normal;
+}
+
+#file-input {
+    display: none;
+}

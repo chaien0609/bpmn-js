@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPMN Diagram (Custom Build)</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,700" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS injected by Webpack -->
+</head>
+
+<body>
+
+    <!-- Canvas -->
+    <div id="canvas"></div>
+
+    <!-- Import / Export Controls (Bottom Left) -->
+    <div class="io-import-export">
+        <ul class="io-import io-control-list io-horizontal">
+            <li>
+                <button title="Open BPMN diagram from local file system"
+                    onclick="document.getElementById('file-input').click()">
+                    <span class="fa fa-folder-open"></span>
+                </button>
+            </li>
+            <li class="vr"></li>
+            <li>
+                <button title="Create new BPMN diagram" onclick="createNew()">
+                    <span class="fa fa-plus-circle"></span>
+                </button>
+            </li>
+        </ul>
+
+        <ul class="io-export io-control-list io-horizontal">
+            <li>
+                <a href="javascript:void(0)" class="download" title="Download as BPMN 2.0 file" onclick="saveDiagram()">
+                    <span class="fa fa-download"></span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="download" title="Download as SVG image" onclick="saveSVG()">
+                    <span class="fa fa-picture-o"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Keyboard Shortcuts (Top Right) -->
+    <div class="io-editing-tools">
+        <ul class="io-control-list io-horizontal">
+            <li>
+                <button title="Toggle keyboard shortcuts overlay" onclick="showShortcuts()">
+                    <span class="fa fa-keyboard-o"> </span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Zoom Controls (Bottom Right) -->
+    <div class="io-zoom-controls">
+        <ul class="io-zoom-reset io-control-list">
+            <li>
+                <button title="Reset zoom" onclick="zoom(0)">
+                    <span class="fa fa-crosshairs"></span>
+                </button>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>
+                <button title="Zoom in" onclick="zoom(1)">
+                    <span class="fa fa-plus"></span>
+                </button>
+            </li>
+            <li>
+                <hr>
+            </li>
+            <li>
+                <button title="Zoom out" onclick="zoom(-1)">
+                    <span class="fa fa-minus"></span>
+                </button>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Hidden Input -->
+    <input type="file" id="file-input" accept=".bpmn, .xml" onchange="openFile(event)" />
+
+    <!-- Shortcuts Dialog -->
+    <div class="io-dialog" id="shortcuts-dialog">
+        <div class="content keybindings-dialog">
+            <button class="close" onclick="hideShortcuts()">×</button>
+            <h3>Keyboard Shortcuts</h3>
+            <ul class="shortcuts-list">
+                <li><span>Undo</span> <span class="binding">Ctrl + Z</span></li>
+                <li><span>Redo</span> <span class="binding">Ctrl + Y</span></li>
+                <li><span>Select All</span> <span class="binding">Ctrl + A</span></li>
+                <li><span>Zoom In</span> <span class="binding">Ctrl + +</span></li>
+                <li><span>Zoom Out</span> <span class="binding">Ctrl + -</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Bundle injected here by Webpack -->
+</body>
+
+</html>
