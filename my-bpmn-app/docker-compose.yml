@@ -1,6 +1,6 @@
 services:
   app:
-    build: .
+    image: chaien/my-bpmn:latest
     ports:
       - "8080:80"
     restart: always
