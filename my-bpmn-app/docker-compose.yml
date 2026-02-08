@@ -2,6 +2,6 @@ services:
   app:
     image: chaien/my-bpmn:latest
     ports:
-      - "8080:80"
+      - "8095:80"
     restart: always
     container_name: bpmn-app
