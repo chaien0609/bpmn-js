@@ -114,13 +114,75 @@ function zoom(val) {
   }
 }
 
+function detectOS() {
+  return /Mac|iPhone|iPad|iPod/.test(navigator.platform) ? 'mac' : 'windows';
+}
+
+function initializeKeyboardShortcuts() {
+  const isMac = detectOS() === 'mac';
+  const bindings = document.querySelectorAll('.binding[data-mac]');
+  
+  bindings.forEach(binding => {
+    const text = isMac ? binding.getAttribute('data-mac') : binding.getAttribute('data-windows');
+    binding.textContent = text;
+  });
+}
+
 function showShortcuts() {
-  document.getElementById('shortcuts-dialog').classList.add('open');
+  initializeKeyboardShortcuts();
+  const dialog = document.getElementById('shortcuts-dialog');
+  dialog.classList.add('open');
+  
+  // Close dialog when clicking outside
+  setTimeout(() => {
+    document.addEventListener('click', handleDialogOutsideClick);
+  }, 0);
 }
 
 function hideShortcuts() {
   document.getElementById('shortcuts-dialog').classList.remove('open');
+  document.removeEventListener('click', handleDialogOutsideClick);
+}
+
+function handleDialogOutsideClick(e) {
+  const dialog = document.getElementById('shortcuts-dialog');
+  const content = dialog.querySelector('.content');
+  
+  // Close if clicking on the overlay (not on the content)
+  if (!content.contains(e.target) && dialog.classList.contains('open')) {
+    hideShortcuts();
+  }
+}
+
+// Setup global keyboard shortcuts
+function setupGlobalShortcuts() {
+  window.addEventListener('keydown', function(e) {
+    const isMac = detectOS() === 'mac';
+    const cmdOrCtrl = isMac ? e.metaKey : e.ctrlKey;
+    
+    // ⌘ + S (Mac) or Ctrl + S (Windows) - Save BPMN diagram
+    if (cmdOrCtrl && e.code === 'KeyS') {
+      e.preventDefault();
+      saveDiagram();
+    }
+    
+    // ⌘ + O (Mac) or Ctrl + O (Windows) - Open diagram from file
+    if (cmdOrCtrl && e.code === 'KeyO') {
+      e.preventDefault();
+      document.getElementById('file-input').click();
+    }
+    
+    // ESC - Close dialog
+    if (e.code === 'Escape') {
+      const dialog = document.getElementById('shortcuts-dialog');
+      if (dialog.classList.contains('open')) {
+        e.preventDefault();
+        hideShortcuts();
+      }
+    }
+  });
 }
 
 // Initialize with new diagram
 openDiagram(newDiagramXML);
+setupGlobalShortcuts();

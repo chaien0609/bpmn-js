@@ -218,7 +218,7 @@ a:focus {
 
 .io-dialog .content {
   position: fixed;
-  width: 300px;
+  width: 400px;
   left: 50%;
   transform: translateX(-50%);
   top: 100px;

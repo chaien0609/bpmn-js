@@ -5,3 +5,7 @@ services:
       - "8095:80"
     restart: always
     container_name: bpmn-app
+    volumes:
+      - ./index.html:/usr/share/nginx/html/index.html
+      - ./app.js:/usr/share/nginx/html/app.js
+      - ./style.css:/usr/share/nginx/html/style.css
